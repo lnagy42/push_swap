@@ -37,6 +37,9 @@ typedef struct s_env
 	t_op		ops[11];
 }				t_env;
 
+void			set_ops(t_env *e);
+void			print_stack(t_stack *stack, int mode);
+void			create_stack(char **arg, t_env *e, int ac);
 void			*try(size_t size);
 void			die(char *s, int exit_code);
 t_env			*env(t_env *e);

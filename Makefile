@@ -13,7 +13,7 @@
 PSH    = push_swap
 CHK    = checker
 CFLG   = -Wextra -Wall -Werror -g
-FILES  = stackfunc.c utils.c
+FILES  = stackfunc.c utils.c ops.c
 PSHF   = push_swap.c $(FILES)
 CHKF   = checker.c $(FILES)
 SRCD   = srcs/

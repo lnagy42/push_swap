@@ -18,8 +18,6 @@ t_stack	*new_elem(int n)
 
 	elem = try(sizeof(t_stack));
 	elem->n = n;
-	elem->next = elem;
-	elem->prev = elem;
 	return (elem);
 }
 
@@ -27,13 +25,16 @@ void	add_end(t_stack **start, t_stack *elem)
 {
 	if (!(*start))
 		*start = elem;
-	else
-	{
-		elem->next = *start;
-		elem->prev = (*start)->prev;
-		(*start)->prev->next = elem;
-		(*start)->prev = elem;
-	}
+	elem->next = *start;
+	elem->prev = (*start)->prev;
+	(*start)->prev->next = elem;
+	(*start)->prev = elem;
+}
+
+void	add_head(t_stack **stack, t_stack *elem)
+{
+	add_end(stack, elem);
+	*stack = (*stack)->prev;
 }
 
 	// 	    ======================
@@ -42,4 +43,11 @@ void	add_end(t_stack **start, t_stack *elem)
 	//      |             
 	//      ======================
 
-//void	create_stack()
+void	create_stack(char **arg, t_env *e, int ac)
+{
+	while (ac--)
+	{
+		add_end(&e->a, new_elem(ft_atoi(*arg)));
+		arg++;
+	}
+}

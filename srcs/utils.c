@@ -39,20 +39,20 @@ void	*try(size_t size)
 	return (p);
 }
 
-// void	set_ops(t_env *e)
-// {	
-// 	static t_op		ops[11] = {{"sa", sa}, {"sb", sb}, {"ss", ss}, {"pa", pa},
-// 		{"pb", pb}, {"ra", ra}, {"rb", rb}, {"rr", rr},
-// 		{"rra", rra}, {"rrb", rrb}, {"rrr", rrr}};
-// 	int				i;
+void	set_ops(t_env *e)
+{	
+	static t_op		ops[11] = {{"sa", sa}, {"sb", sb}, {"ss", ss}, {"pa", pa},
+		{"pb", pb}, {"ra", ra}, {"rb", rb}, {"rr", rr},
+		{"rra", rra}, {"rrb", rrb}, {"rrr", rrr}};
+	int				i;
 
-// 	i = 0;
-// 	while (i < 11)
-// 	{
-// 		e->ops[i] = ops[i];
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < 11)
+	{
+		e->ops[i] = ops[i];
+		i++;
+	}
+}
 
 void	print_stack(t_stack *stack, int mode)
 {

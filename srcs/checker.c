@@ -12,7 +12,15 @@
 
 #include "push_swap.h"
 
-int		main(void)
+// while (get_next_line(0, &line))
+
+int		main(int ac, char **av)
 {
+	t_env	e;
+
+	env(&e);
+	create_stack(av + 1, &e, ac - 1);
+	print_stack(e.a, 1);
+	set_ops(&e);
 	return (0);
 }
