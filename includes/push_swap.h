@@ -37,6 +37,8 @@ typedef struct s_env
 	t_op		ops[11];
 }				t_env;
 
+void			add_end(t_stack **start, t_stack *elem);
+void			add_head(t_stack **stack, t_stack *elem);
 void			set_ops(t_env *e);
 void			print_stack(t_stack *stack, int mode);
 void			create_stack(char **arg, t_env *e, int ac);

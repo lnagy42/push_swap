@@ -18,6 +18,8 @@ t_stack	*new_elem(int n)
 
 	elem = try(sizeof(t_stack));
 	elem->n = n;
+	elem->prev = elem;
+	elem->next = elem;
 	return (elem);
 }
 
