@@ -16,11 +16,11 @@ int	sa(t_stack **a, t_stack **b)
 {
 	(void)b;
 	if (!*a || (*a)->next == *a)
-		return (-1);
+		return (0);
 	(*a)->n ^= (*a)->next->n;
 	(*a)->next->n ^= (*a)->n;
 	(*a)->n ^= (*a)->next->n;
-	return (0);
+	return (1);
 }
 
 
@@ -28,11 +28,11 @@ int	sb(t_stack **a, t_stack **b)
 {
 	(void)a;
 	if (!*b || (*b)->next == *b)
-		return (-1);
+		return (0);
 	(*b)->n ^= (*b)->next->n;
 	(*b)->next->n ^= (*b)->n;
 	(*b)->n ^= (*b)->next->n;
-	return (0);
+	return (1);
 }
 
 int ss(t_stack **a, t_stack **b)
@@ -54,18 +54,18 @@ int	ra(t_stack **a, t_stack **b)
 {
 	(void)b;
 	if (!*a)
-		return (-1);
+		return (0);
 	*a = (*a)->next;
-	return (0);
+	return (1);
 }
 
 int	rb(t_stack **a, t_stack **b)
 {
 	(void)a;
 	if (!*b)
-		return (-1);
+		return (0);
 	*b = (*b)->next;
-	return (0);
+	return (1);
 }
 
 int	rr(t_stack **a, t_stack **b)
@@ -77,18 +77,18 @@ int	rra(t_stack **a, t_stack **b)
 {
 	(void)b;
 	if (!*a)
-		return (-1);
+		return (0);
 	*a = (*a)->prev;
-	return (0);
+	return (1);
 }
 
 int	rrb(t_stack **a, t_stack **b)
 {
 	(void)a;
 	if (!*b)
-		return (-1);
+		return (0);
 	*b = (*b)->prev;
-	return (0);
+	return (1);
 }
 
 int	rrr(t_stack **a, t_stack **b)
@@ -98,26 +98,32 @@ int	rrr(t_stack **a, t_stack **b)
 
 int	pa(t_stack **a, t_stack **b)
 {
+	t_stack	*t;
+
+	t = *b;
 	if (!*b)
-		return (-1);
+		return (0);
 	(*b)->prev->next = (*b)->next;
 	(*b)->next->prev = (*b)->prev;
 	*b = (*b)->next;
-	add_head(a, (*b)->prev);
-	if (*b == (*b)->next)
+	add_head(a, t);
+	if (*b == t)
 		*b = NULL;
-	return (0);
+	return (1);
 }
 
 int	pb(t_stack **a, t_stack **b)
 {
+	t_stack	*t;
+
+	t = *a;
 	if (!*a)
-		return (-1);
+		return (0);
 	(*a)->prev->next = (*a)->next;
 	(*a)->next->prev = (*a)->prev;
 	*a = (*a)->next;
-	add_head(b, (*a)->prev);
-	if (*a == (*a)->next)
+	add_head(b, t);
+	if (*a == t)
 		*a = NULL;
-	return (0);
+	return (1);
 }

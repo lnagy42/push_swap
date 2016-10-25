@@ -16,6 +16,13 @@
 # include <unistd.h>
 # include "libft.h"
 
+typedef struct s_tree
+{
+	int 			op;
+	int				calc;
+	struct s_tree	*next[11];
+}				t_tree;
+
 typedef struct s_stack
 {
 	int				n;
@@ -27,6 +34,8 @@ typedef struct s_op
 {
 	char	op[4];
 	int		(*f)(t_stack **a, t_stack **b);
+	int		(*rev)(t_stack **a, t_stack **b);
+	int		rev_op;
 }				t_op;
 
 typedef struct s_env
@@ -37,6 +46,7 @@ typedef struct s_env
 	t_op		ops[11];
 }				t_env;
 
+int				is_sorted(t_stack *stack);
 void			add_end(t_stack **start, t_stack *elem);
 void			add_head(t_stack **stack, t_stack *elem);
 void			set_ops(t_env *e);

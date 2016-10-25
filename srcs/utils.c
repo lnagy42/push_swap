@@ -41,9 +41,10 @@ void	*try(size_t size)
 
 void	set_ops(t_env *e)
 {	
-	static t_op		ops[11] = {{"sa", sa}, {"sb", sb}, {"ss", ss}, {"pa", pa},
-		{"pb", pb}, {"ra", ra}, {"rb", rb}, {"rr", rr},
-		{"rra", rra}, {"rrb", rrb}, {"rrr", rrr}};
+	static t_op		ops[11] = {{"sa", sa, sa, 0}, {"sb", sb, sb, 1},
+		{"ss", ss, ss, 2}, {"pa", pa, pb, 4}, {"pb", pb, pa, 3},
+		{"ra", ra, rra, 8}, {"rb", rb, rrb, 9}, {"rr", rr, rrr, 10},
+		{"rra", rra, ra, 5}, {"rrb", rrb, rb, 6}, {"rrr", rrr, rr, 7}};
 	int				i;
 
 	i = 0;

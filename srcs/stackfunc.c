@@ -45,6 +45,21 @@ void	add_head(t_stack **stack, t_stack *elem)
 	//      |             
 	//      ======================
 
+int		is_sorted(t_stack *stack)
+{
+	t_stack	*last;
+
+	last = stack->prev;
+	if (!stack || stack == last)
+		return (1);
+	while (stack->next != last)
+		if (stack->n > stack->next->n)
+			return (0);
+		else
+			stack = stack->next;
+	return (stack->n > last->n ? 0 : 1);
+}
+
 void	create_stack(char **arg, t_env *e, int ac)
 {
 	while (ac--)
