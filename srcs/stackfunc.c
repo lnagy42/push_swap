@@ -23,7 +23,7 @@ t_stack	*new_elem(int n)
 	return (elem);
 }
 
-void	add_end(t_stack **start, t_stack *elem)
+t_stack	*add_end(t_stack **start, t_stack *elem)
 {
 	if (!(*start))
 		*start = elem;
@@ -31,12 +31,14 @@ void	add_end(t_stack **start, t_stack *elem)
 	elem->prev = (*start)->prev;
 	(*start)->prev->next = elem;
 	(*start)->prev = elem;
+	return (elem);
 }
 
-void	add_head(t_stack **stack, t_stack *elem)
+t_stack	*add_head(t_stack **stack, t_stack *elem)
 {
 	add_end(stack, elem);
 	*stack = (*stack)->prev;
+	return (elem);
 }
 
 	// 	    ======================
@@ -49,8 +51,10 @@ int		is_sorted(t_stack *stack)
 {
 	t_stack	*last;
 
+	if (!stack)
+		return (0);
 	last = stack->prev;
-	if (!stack || stack == last)
+	if (stack == last)
 		return (1);
 	while (stack->next != last)
 		if (stack->n > stack->next->n)

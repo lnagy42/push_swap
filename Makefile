@@ -14,7 +14,7 @@ PSH    = push_swap
 CHK    = checker
 CFLG   = -Wextra -Wall -Werror -g
 FILES  = stackfunc.c utils.c ops.c
-PSHF   = push_swap.c $(FILES)
+PSHF   = push_swap.c tree_func.c $(FILES)
 CHKF   = checker.c $(FILES)
 SRCD   = srcs/
 OBJD   = objs/
@@ -29,18 +29,11 @@ INC    = -Iincludes -Ilibft
 
 .PHONY: lib all clean re fclean
 
-all : libft $(CHK) $(PSH)
+all : $(CHK) $(PSH)
 
 $(OBJD)%.o: $(SRCD)%.c ${HEAD}
 	@mkdir -p objs
 	gcc $(CFLG) $(INC) -c -o $@ $<
-
-libft:
-	rm -rf ~/libft
-	git clone $(GITLIB) ~/libft
-	rm -f libft
-	ln -s ~/libft
-	make -C libft re
 
 $(PSH): $(PSHO)
 		gcc $(CFLG) -o $(PSH) $(PSHO) $(LIBS)

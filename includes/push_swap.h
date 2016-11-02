@@ -38,6 +38,8 @@ typedef struct s_op
 	int		rev_op;
 }				t_op;
 
+typedef unsigned long	t_ulong;
+
 typedef struct s_env
 {
 	t_stack 	*a;
@@ -46,10 +48,14 @@ typedef struct s_env
 	t_op		ops[11];
 }				t_env;
 
+t_tree			*new_leaf(int op);
+t_tree			*climb_tree(t_tree *upper, t_tree *stage, t_env *e);
 int				is_sorted(t_stack *stack);
-void			add_end(t_stack **start, t_stack *elem);
-void			add_head(t_stack **stack, t_stack *elem);
+t_stack			*add_end(t_stack **start, t_stack *elem);
+t_stack			*add_head(t_stack **stack, t_stack *elem);
 void			set_ops(t_env *e);
+t_stack			*new_elem(int op);
+void			print_op(int o);
 void			print_stack(t_stack *stack, int mode);
 void			create_stack(char **arg, t_env *e, int ac);
 void			*try(size_t size);

@@ -41,7 +41,7 @@ void	*try(size_t size)
 
 void	set_ops(t_env *e)
 {	
-	static t_op		ops[11] = {{"sa", sa, sa, 0}, {"sb", sb, sb, 1},
+	const t_op		ops[11] = {{"sa", sa, sa, 0}, {"sb", sb, sb, 1},
 		{"ss", ss, ss, 2}, {"pa", pa, pb, 4}, {"pb", pb, pa, 3},
 		{"ra", ra, rra, 8}, {"rb", rb, rrb, 9}, {"rr", rr, rrr, 10},
 		{"rra", rra, ra, 5}, {"rrb", rrb, rb, 6}, {"rrr", rrr, rr, 7}};
@@ -55,6 +55,12 @@ void	set_ops(t_env *e)
 	}
 }
 
+
+void	print_op(int o)
+{
+	ft_printf("op : %s\n", env(NULL)->ops[o].op);
+}
+
 void	print_stack(t_stack *stack, int mode)
 {
 	t_stack		*last_elem;
@@ -65,13 +71,13 @@ void	print_stack(t_stack *stack, int mode)
 	while (stack != last_elem)
 	{
 		if (mode)
-			ft_printf("%p : %d\n", stack, stack->n);
+			ft_printf("%d\n", stack->n);
 		else
-			ft_printf("%p : %s\n", stack, env(NULL)->ops[stack->n]);
+			ft_printf("%s\n", env(NULL)->ops[stack->n].op);
 		stack = stack->next;
 	}
 	if (mode)
-		ft_printf("%p : %d\n", stack, stack->n);
+		ft_printf("%d\n", stack->n);
 	else
-		ft_printf("%p : %s\n", stack, env(NULL)->ops[stack->n]);
+		ft_printf("%s\n", env(NULL)->ops[stack->n].op);
 }
