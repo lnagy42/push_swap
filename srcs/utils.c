@@ -68,7 +68,7 @@ void	print_stack(t_stack *stack, int mode)
 	if (!stack)
 		return ;
 	last_elem = stack->prev;
-	while (stack != last_elem)
+	while (stack != last_elem && stack != stack->next)
 	{
 		if (mode)
 			ft_printf("%d\n", stack->n);
@@ -76,6 +76,8 @@ void	print_stack(t_stack *stack, int mode)
 			ft_printf("%s\n", env(NULL)->ops[stack->n].op);
 		stack = stack->next;
 	}
+	if (stack->next == stack && stack != last_elem)
+		die("oups", EXIT_FAILURE);
 	if (mode)
 		ft_printf("%d\n", stack->n);
 	else

@@ -22,6 +22,27 @@ t_tree	*new_leaf(int op)
 	return (leaf);
 }
 
+void	saw_tree(t_tree *root, int branch)
+{
+	if (!root)
+		return ;
+	if (branch != -1 && root->next[branch])
+	{
+		saw_tree(root->next[branch], -1);
+		root->next[branch] = NULL;
+	}
+	else
+	{
+		branch = 0;
+		while (branch < 11)
+		{
+			saw_tree(root->next[branch], -1);
+			free(root->next[branch]);
+			branch++;
+		}
+	}
+}
+
 t_tree	*climb_tree(t_tree *upper, t_tree *stage, t_env *e)
 {
 	int			i;
@@ -31,6 +52,7 @@ t_tree	*climb_tree(t_tree *upper, t_tree *stage, t_env *e)
 		{NULL, &sb, &sa, NULL}, {NULL, &rrb, &rra, NULL}, {NULL, &rb, &ra, NULL}};
 
 	if (stage->op != -1)
+	{
 		if ((i = e->ops[stage->op].f(&e->a, &e->b)))
 		{
 			if (i != -1 && i != 3)
@@ -39,14 +61,10 @@ t_tree	*climb_tree(t_tree *upper, t_tree *stage, t_env *e)
 			free(stage);
 			return (NULL);
 		}
+	}
 	i = 0;
 	if (stage->calc)
 	{
-		ft_printf("%8p %8p\n", upper, stage);
-		ft_printf("---------a---------\n");
-		print_stack(e->a, 1);
-		ft_printf("---------b---------\n");
-		print_stack(e->b, 1);
 		if (!e->b && is_sorted(e->a))
 			return ((t_ulong)add_head(&e->op, new_elem(stage->op)) * 0 + stage);
 		stage->calc = 0;
@@ -54,6 +72,8 @@ t_tree	*climb_tree(t_tree *upper, t_tree *stage, t_env *e)
 		{
 			stage->next[i] = (stage->op == -1 || i != e->ops[stage->op].rev_op) ?
 			new_leaf(i) : NULL;
+			if (stage->next[i])
+				stage->next[i]->parent = stage;
 			i++;
 		}
 	}

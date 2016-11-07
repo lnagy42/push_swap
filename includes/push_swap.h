@@ -21,6 +21,7 @@ typedef struct s_tree
 	int 			op;
 	int				calc;
 	struct s_tree	*next[11];
+	struct s_tree	*parent;
 }				t_tree;
 
 typedef struct s_stack

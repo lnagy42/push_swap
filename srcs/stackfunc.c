@@ -26,7 +26,11 @@ t_stack	*new_elem(int n)
 t_stack	*add_end(t_stack **start, t_stack *elem)
 {
 	if (!(*start))
+	{
+		elem->next = elem;
+		elem->prev = elem;
 		*start = elem;
+	}
 	elem->next = *start;
 	elem->prev = (*start)->prev;
 	(*start)->prev->next = elem;
